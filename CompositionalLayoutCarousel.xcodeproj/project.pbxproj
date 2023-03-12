@@ -13,6 +13,7 @@
 		B480347629B831AE00D6FEF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B480347529B831AE00D6FEF5 /* Assets.xcassets */; };
 		B480347929B831AE00D6FEF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B480347729B831AE00D6FEF5 /* LaunchScreen.storyboard */; };
 		B480348129B8332D00D6FEF5 /* CarouselContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480348029B8332D00D6FEF5 /* CarouselContentCell.swift */; };
+		B490EE4D29BDEF1A001782D0 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490EE4C29BDEF1A001782D0 /* Section.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B480347829B831AE00D6FEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B480347A29B831AE00D6FEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B480348029B8332D00D6FEF5 /* CarouselContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselContentCell.swift; sourceTree = "<group>"; };
+		B490EE4C29BDEF1A001782D0 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				B480346C29B831AD00D6FEF5 /* AppDelegate.swift */,
 				B480347029B831AD00D6FEF5 /* ViewController.swift */,
 				B480348029B8332D00D6FEF5 /* CarouselContentCell.swift */,
+				B490EE4C29BDEF1A001782D0 /* Section.swift */,
 				B480347229B831AD00D6FEF5 /* Main.storyboard */,
 				B480347529B831AE00D6FEF5 /* Assets.xcassets */,
 				B480347729B831AE00D6FEF5 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B480347129B831AD00D6FEF5 /* ViewController.swift in Sources */,
+				B490EE4D29BDEF1A001782D0 /* Section.swift in Sources */,
 				B480346D29B831AD00D6FEF5 /* AppDelegate.swift in Sources */,
 				B480348129B8332D00D6FEF5 /* CarouselContentCell.swift in Sources */,
 			);

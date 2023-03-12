@@ -9,14 +9,24 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    private let sections: [Section] = [
+        .large,
+        .landscape,
+        .square
+    ]
+    
     private lazy var collectionView: UICollectionView = {
-        let collectionViewLayout: UICollectionViewLayout = {
-            let layout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
-                return self.layoutSections[sectionIndex]
-            }
-            return layout
-        }()
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 32
         
+        let collectionViewLayout = UICollectionViewCompositionalLayout(
+            sectionProvider: { [weak self] (index, environment) in
+                guard let self else { return nil }
+                return self.sections[index].layoutSection(frame: self.view.frame)
+            },
+            configuration: config
+        )
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
@@ -24,61 +34,6 @@ final class ViewController: UIViewController {
         
         return collectionView
     }()
-    
-    private lazy var layoutSections: [NSCollectionLayoutSection] = [
-        {
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            let width = view.frame.width - 16 * 2
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
-                                                   heightDimension: .absolute(width * 0.7))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-            let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
-            layoutSection.interGroupSpacing = 8
-            
-            return layoutSection
-        }(),
-        
-        {
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-            let width = view.frame.width * 0.6
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
-                                                   heightDimension: .absolute(width * 0.5))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-            let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = .groupPaging
-            layoutSection.interGroupSpacing = 8
-            layoutSection.contentInsets = .init(top: 32, leading: 16, bottom: 0, trailing: 16)
-            
-            return layoutSection
-        }(),
-        
-        {
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                  heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-            let width = view.frame.width * 0.4
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
-                                                   heightDimension: .absolute(width * 1.0))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-            let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = .groupPaging
-            layoutSection.interGroupSpacing = 8
-            layoutSection.contentInsets = .init(top: 32, leading: 16, bottom: 0, trailing: 16)
-
-            return layoutSection
-        }()
-    ]
     
     private let colors: [UIColor] = [.systemMint, .systemTeal, .systemCyan, .systemBlue, .systemIndigo]
     
@@ -99,7 +54,7 @@ final class ViewController: UIViewController {
 extension ViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        layoutSections.count
+        sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
